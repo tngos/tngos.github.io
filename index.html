@@ -29,65 +29,87 @@
             position: relative;
         }
 
-        /* --- LANG PICKER --- */
+        /* --- LANG PICKER (FIXED) --- */
         .lang-picker {
             position: absolute;
             top: 25px;
             right: 25px;
             z-index: 100;
+            padding-bottom: 10px; /* Создает невидимый мостик до меню */
         }
 
         .lang-current {
             background: var(--glass);
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 50px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
             font-weight: 500;
+            user-select: none;
+        }
+
+        .lang-current:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
         }
 
         .lang-dropdown {
             position: absolute;
-            top: calc(100% + 10px);
+            top: 45px; /* Плотно к кнопке */
             right: 0;
             background: rgba(10, 15, 30, 0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            min-width: 140px;
-            display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 18px;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             overflow: hidden;
         }
 
-        .lang-picker:hover .lang-dropdown { display: block; }
+        /* Показываем при наведении на весь контейнер lang-picker */
+        .lang-picker:hover .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
 
         .lang-item {
-            padding: 10px 16px;
+            padding: 12px 18px;
             display: block;
             color: white;
             text-decoration: none;
             font-size: 0.85rem;
             transition: 0.2s;
             cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
 
-        .lang-item:hover { background: var(--accent); }
+        .lang-item:last-child { border-bottom: none; }
 
-        .globe-icon { width: 16px; height: 16px; fill: var(--accent); }
+        .lang-item:hover {
+            background: var(--accent);
+            color: white;
+            padding-left: 22px; /* Эффект смещения при наведении */
+        }
 
-        /* --- BACKGROUND --- */
+        .globe-icon { width: 18px; height: 18px; fill: var(--accent); }
+
+        /* --- BACKGROUND BLOBS --- */
         .bg-blobs { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; filter: blur(100px); opacity: 0.7; }
         .blob { position: absolute; width: 550px; height: 550px; border-radius: 50%; animation: move 22s infinite alternate ease-in-out; }
         .blob-1 { top: -5%; left: -5%; background: radial-gradient(circle, #312e81 0%, transparent 70%); }
         .blob-2 { bottom: -5%; right: -5%; background: radial-gradient(circle, #1e1b4b 0%, transparent 70%); animation-delay: -5s; }
-        .blob-3 { top: 20%; right: 10%; background: radial-gradient(circle, #6d28d9 0%, transparent 70%); animation-delay: -10s; width: 400px; }
+        .blob-3 { top: 20%; right: 10%; background: radial-gradient(circle, #6d28d9 0%, transparent 70%); animation-delay: -10s; }
         .blob-4 { bottom: 20%; left: 15%; background: radial-gradient(circle, #4c1d95 0%, transparent 70%); animation-delay: -15s; }
 
         @keyframes move {
@@ -167,13 +189,14 @@
         @media (max-width: 750px) { 
             .button-row { flex-direction: column; }
             h1 { font-size: 3rem; }
+            .lang-picker { top: 15px; right: 15px; }
         }
     </style>
 </head>
 <body>
 
     <div class="lang-picker">
-        <div class="lang-current" id="current-lang">
+        <div class="lang-current">
             <svg class="globe-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
             <span id="lang-text">English</span>
         </div>
@@ -256,7 +279,7 @@
                 'c2_4': 'Based on official HyperOS build'
             },
             'ru': {
-                'subtitle': 'Новое поколение HyperOS',
+                'subtitle': 'Новое поколение использования HyperOS',
                 'changelog_title': 'Список изменений и баги:',
                 'btn_ss': 'Скриншоты',
                 'btn_dl': 'Скачать ROM',
@@ -268,7 +291,7 @@
                 'c2_4': 'Основано на официальной сборке HyperOS'
             },
             'kz': {
-                'subtitle': 'HyperOS жаңа буыны',
+                'subtitle': 'HyperOS-ты пайдаланудың жаңа буыны',
                 'changelog_title': 'Өзгерістер мен қателер:',
                 'btn_ss': 'Скриншоттар',
                 'btn_dl': 'ROM жүктеу',
@@ -280,8 +303,8 @@
                 'c2_4': 'Ресми HyperOS негізінде'
             },
             'es': {
-                'subtitle': 'Nueva generación de HyperOS',
-                'changelog_title': 'Cambios и errores:',
+                'subtitle': 'Nueva generación de uso de HyperOS',
+                'changelog_title': 'Cambios y errores:',
                 'btn_ss': 'Capturas',
                 'btn_dl': 'Descargar ROM',
                 'c1_1': 'SukiSU Ultra con SusFS preinstalado',
@@ -292,7 +315,7 @@
                 'c2_4': 'Basado en la versión oficial de HyperOS'
             },
             'ua': {
-                'subtitle': 'Нове покоління HyperOS',
+                'subtitle': 'Нове покоління використання HyperOS',
                 'changelog_title': 'Список змін та баги:',
                 'btn_ss': 'Скріншоти',
                 'btn_dl': 'Завантажити ROM',
@@ -306,11 +329,9 @@
         };
 
         function changeLang(lang) {
-            // Обновляем текст в кнопке выбора
             const langNames = { 'en': 'English', 'ru': 'Русский', 'es': 'Español', 'kz': 'Қазақша', 'ua': 'Український' };
             document.getElementById('lang-text').innerText = langNames[lang];
 
-            // Меняем все элементы с data-key
             document.querySelectorAll('[data-key]').forEach(elem => {
                 const key = elem.getAttribute('data-key');
                 if (translations[lang][key]) {
