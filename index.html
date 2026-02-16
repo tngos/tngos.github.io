@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TengeOS | Evolution Beyond Limits</title>
+    <title>TengeOS | Best UI Experience</title>
     <style>
         :root {
             --primary: #818cf8;
@@ -37,152 +37,150 @@
 
         .blob {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            filter: blur(80px);
-            opacity: 0.15;
+            width: 650px;
+            height: 650px;
+            filter: blur(90px);
+            opacity: 0.18;
             border-radius: 50%;
-            animation: move 20s infinite alternate;
+            animation: move 25s infinite alternate ease-in-out;
         }
 
-        .blob-1 { top: -10%; left: -10%; background: radial-gradient(circle, #4f46e5 0%, transparent 70%); }
-        .blob-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, #9333ea 0%, transparent 70%); animation-delay: -5s; }
-        .blob-3 { top: 40%; right: 15%; background: radial-gradient(circle, #06b6d4 0%, transparent 70%); animation-delay: -10s; }
+        .blob-1 { top: -15%; left: -10%; background: radial-gradient(circle, #4f46e5 0%, transparent 75%); }
+        .blob-2 { bottom: -10%; right: -5%; background: radial-gradient(circle, #9333ea 0%, transparent 75%); animation-delay: -7s; }
+        .blob-3 { top: 30%; right: 10%; background: radial-gradient(circle, #06b6d4 0%, transparent 75%); animation-delay: -12s; }
 
         @keyframes move {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(20vw, 20vh) scale(1.2); }
+            100% { transform: translate(15vw, 15vh) scale(1.15); }
         }
 
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
-            top: 0; width: 100%; padding: 20px 60px;
+            top: 0; width: 100%; padding: 20px 50px;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--glass-border);
         }
 
-        .brand { font-size: 22px; font-weight: 900; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
-        .brand-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+        .brand { font-size: 24px; font-weight: 900; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
+        .brand-dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 15px var(--primary); }
 
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .source-link { 
-            background: var(--glass); padding: 8px 20px; border-radius: 100px; 
+        .nav-right { display: flex; gap: 25px; align-items: center; }
+        .source-btn { 
+            background: var(--glass); padding: 9px 22px; border-radius: 100px; 
             border: 1px solid var(--glass-border); text-decoration: none; color: white;
-            font-size: 14px; font-weight: 600; transition: 0.3s;
+            font-size: 14px; font-weight: 600; transition: 0.4s;
         }
-        .source-link:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+        .source-btn:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(129, 140, 248, 0.2); }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
-            height: 100vh;
+            height: 90vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 0 20px;
         }
 
         .hero-badge {
-            background: rgba(129, 140, 248, 0.1);
+            background: rgba(129, 140, 248, 0.12);
             color: var(--primary);
-            padding: 6px 16px; border-radius: 100px;
-            font-size: 12px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; margin-bottom: 20px;
-            border: 1px solid rgba(129, 140, 248, 0.2);
+            padding: 8px 20px; border-radius: 100px;
+            font-size: 13px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 25px;
+            border: 1px solid rgba(129, 140, 248, 0.25);
         }
 
         .hero h1 {
-            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-size: clamp(3.5rem, 9vw, 6.5rem);
             font-weight: 900; letter-spacing: -4px;
-            line-height: 0.9; margin-bottom: 20px;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
+            line-height: 1; margin-bottom: 25px;
+            background: linear-gradient(to bottom, #fff 40%, #94a3b8 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .hero p { max-width: 600px; font-size: 1.2rem; color: var(--text-dim); margin-bottom: 40px; }
+        .hero p { max-width: 700px; font-size: 1.25rem; color: var(--text-dim); margin-bottom: 45px; font-weight: 400; }
 
-        .cta-group { display: flex; gap: 15px; }
-        .btn-primary { 
-            background: var(--primary); color: white; padding: 16px 35px; border-radius: 14px;
-            text-decoration: none; font-weight: 700; transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        .btn-main { 
+            background: var(--primary); color: white; padding: 18px 40px; border-radius: 16px;
+            text-decoration: none; font-weight: 800; transition: 0.4s;
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
         }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5); }
+        .btn-main:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 45px rgba(99, 102, 241, 0.5); }
 
-        /* --- DOWNLOAD GRID (4 COLUMNS) --- */
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 3rem; font-weight: 800; letter-spacing: -2px; }
+        /* --- DOWNLOADS (4 COLUMNS) --- */
+        .grid-header { text-align: center; margin-bottom: 60px; }
+        .grid-header h2 { font-size: 3.2rem; font-weight: 900; letter-spacing: -2px; }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 25px; max-width: 1600px; margin: 0 auto; padding: 0 40px 100px;
+            gap: 25px; max-width: 1550px; margin: 0 auto; padding: 0 40px 120px;
         }
 
-        .card-container {
-            position: relative; padding: 2px; border-radius: 28px;
+        /* Rainbow Border Magic */
+        .card-wrap {
+            position: relative; padding: 2px; border-radius: 32px;
             background: var(--glass-border); overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .card-container::before {
+        .card-wrap::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, var(--primary), var(--accent), transparent 60%);
-            animation: rotate 4s linear infinite; opacity: 0; transition: 0.4s;
+            background: conic-gradient(from 0deg, transparent, #818cf8, #c084fc, #06b6d4, transparent 70%);
+            animation: spin 5s linear infinite; opacity: 0; transition: 0.5s;
         }
 
-        .card-container:hover { transform: translateY(-10px); }
-        .card-container:hover::before { opacity: 1; }
+        .card-wrap:hover { transform: translateY(-12px); }
+        .card-wrap:hover::before { opacity: 1; }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .card {
-            background: #0f172a; border-radius: 26px; padding: 30px;
-            position: relative; z-index: 2; height: 100%;
+            background: #0b1222; border-radius: 30px; padding: 35px;
+            position: relative; z-index: 5; height: 100%;
             display: flex; flex-direction: column;
         }
 
-        .card-tag { font-family: var(--font-mono); font-size: 11px; color: var(--primary); font-weight: 800; margin-bottom: 10px; display: block; }
-        .card h3 { font-size: 24px; font-weight: 800; margin-bottom: 5px; }
-        .card-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 25px; display: block; }
+        .card-tag { font-family: var(--font-mono); font-size: 11px; color: var(--primary); font-weight: 800; margin-bottom: 12px; display: block; letter-spacing: 1.5px; }
+        .card h3 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+        .card-ver { font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); margin-bottom: 30px; display: block; }
 
-        .feature-list { list-style: none; margin-bottom: 30px; flex-grow: 1; }
-        .feature-list li { 
-            font-size: 14px; color: #cbd5e1; margin-bottom: 12px; 
-            display: flex; align-items: center; gap: 10px;
+        .log-list { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+        .log-list li { 
+            font-size: 14px; color: #cbd5e1; margin-bottom: 14px; 
+            display: flex; align-items: center; gap: 12px;
         }
-        .feature-list li::before { content: ''; width: 6px; height: 6px; background: var(--primary); border-radius: 50%; }
+        .log-list li::before { content: '◇'; color: var(--primary); font-weight: 900; }
 
-        .btn-card {
-            padding: 12px; border-radius: 12px; text-align: center;
-            text-decoration: none; font-weight: 700; font-size: 13px;
-            transition: 0.3s;
+        .btn-dl {
+            padding: 14px; border-radius: 14px; text-align: center;
+            text-decoration: none; font-weight: 800; font-size: 14px;
+            transition: 0.3s; background: white; color: black;
         }
-        .btn-dl { background: white; color: black; }
         .btn-dl:hover { background: var(--primary); color: white; }
 
         /* --- LANG PICKER --- */
-        .lang-dropdown { position: relative; }
-        .lang-current { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
+        .lang-box { position: relative; }
+        .lang-btn { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: white; }
         .lang-list {
-            position: absolute; top: 130%; right: 0; background: #1e293b;
-            border: 1px solid var(--glass-border); border-radius: 12px;
-            width: 150px; opacity: 0; visibility: hidden; transform: translateY(10px);
-            transition: 0.3s; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: absolute; top: 140%; right: 0; background: #111827;
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            width: 160px; opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: 0.3s; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
-        .lang-dropdown:hover .lang-list { opacity: 1; visibility: visible; transform: translateY(0); }
-        .lang-item { padding: 10px 15px; cursor: pointer; transition: 0.2s; font-size: 13px; }
+        .lang-box:hover .lang-list { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-item { padding: 12px 20px; cursor: pointer; transition: 0.2s; font-size: 14px; }
         .lang-item:hover { background: var(--primary); }
 
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-
         /* --- FOOTER --- */
-        footer { padding: 60px; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-dim); font-size: 14px; }
+        footer { padding: 100px 40px; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-dim); font-size: 14px; }
 
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 700px) { 
+        @media (max-width: 1400px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 800px) { 
             .grid { grid-template-columns: 1fr; padding: 20px; }
             nav { padding: 20px; }
-            .hero h1 { font-size: 3.5rem; }
+            .hero h1 { font-size: 3.2rem; }
         }
     </style>
 </head>
@@ -199,10 +197,10 @@
             <div class="brand-dot"></div>
             TengeOS
         </div>
-        <div class="nav-links">
-            <a href="#" class="source-link">GitHub</a>
-            <div class="lang-dropdown">
-                <div class="lang-current">
+        <div class="nav-right">
+            <a href="https://github.com/tngos/tngos.github.io/tree/main" target="_blank" class="source-btn">Source</a>
+            <div class="lang-box">
+                <div class="lang-btn">
                     <span id="active-lang">English</span>
                 </div>
                 <div class="lang-list">
@@ -218,101 +216,101 @@
     </nav>
 
     <section class="hero">
-        <div class="hero-badge">Build for Duchamp</div>
-        <h1 data-i18n="hero_h1">Keep Evolving</h1>
+        <div class="hero-badge">TengeOS official builds</div>
+        <h1 data-i18n="hero_h1">Best UI Experience</h1>
         <p data-i18n="subtitle">Next-Generation of HyperOS with focus on performance, clean UI, and deep core optimizations.</p>
-        <div class="cta-group">
-            <a href="https://t.me/TengeOS_Roms" class="btn-primary" data-i18n="join_tg">Join Telegram</a>
+        <div class="cta">
+            <a href="https://t.me/TengeOS_Roms" class="btn-main" data-i18n="join_tg">Join Telegram</a>
         </div>
     </section>
 
-    <div class="section-title">
+    <div class="grid-header">
         <h2 data-i18n="downloads">Downloads</h2>
     </div>
 
     <main class="grid">
-        <div class="card-container">
+        <div class="card-wrap">
             <div class="card">
-                <span class="card-tag">STABLE PORT</span>
+                <span class="card-tag">OFFICIAL PORT</span>
                 <h3>TengeOS Port</h3>
-                <span class="card-meta">v3.0.300 • Android 15</span>
-                <ul class="feature-list">
+                <span class="card-ver">v3.0.300 • duchamp</span>
+                <ul class="log-list">
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                 </ul>
-                <a href="#" class="btn-card btn-dl" data-i18n="btn_dl">Get Download</a>
+                <a href="#" class="btn-dl" data-i18n="btn_dl">Download ROM</a>
             </div>
         </div>
 
-        <div class="card-container">
+        <div class="card-wrap">
             <div class="card">
                 <span class="card-tag">SYSTEM MOD</span>
                 <h3>TengeOS Mod</h3>
-                <span class="card-meta">v3.0.5.0 • Duchamp</span>
-                <ul class="feature-list">
+                <span class="card-ver">v3.0.5.0 • duchamp</span>
+                <ul class="log-list">
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                 </ul>
-                <a href="#" class="btn-card btn-dl" data-i18n="btn_dl">Get Download</a>
+                <a href="#" class="btn-dl" data-i18n="btn_dl">Download ROM</a>
             </div>
         </div>
 
-        <div class="card-container">
+        <div class="card-wrap">
             <div class="card">
-                <span class="card-tag">PERFORMANCE</span>
+                <span class="card-tag">GAME EDITION</span>
                 <h3>TengeOS Gaming</h3>
-                <span class="card-meta">v1.0.2.0 • Ultra</span>
-                <ul class="feature-list">
+                <span class="card-ver">v1.0.2.0 • duchamp</span>
+                <ul class="log-list">
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                 </ul>
-                <a href="#" class="btn-card btn-dl" data-i18n="btn_dl">Get Download</a>
+                <a href="#" class="btn-dl" data-i18n="btn_dl">Download ROM</a>
             </div>
         </div>
 
-        <div class="card-container">
+        <div class="card-wrap">
             <div class="card">
-                <span class="card-tag">MINIMALIST</span>
+                <span class="card-tag">PURE GLOBAL</span>
                 <h3>TengeOS Pure</h3>
-                <span class="card-meta">v1.0.15.0 • Global</span>
-                <ul class="feature-list">
+                <span class="card-ver">v1.0.15.0 • duchamp</span>
+                <ul class="log-list">
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                     <li data-i18n="developing">In Developing</li>
                 </ul>
-                <a href="#" class="btn-card btn-dl" data-i18n="btn_dl">Get Download</a>
+                <a href="#" class="btn-dl" data-i18n="btn_dl">Download ROM</a>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>© 2026 TengeOS Project. Built with passion for the community.</p>
-        <p style="margin-top: 10px; opacity: 0.5;">Not affiliated with Xiaomi Inc.</p>
+        <p>© 2026 TengeOS Project. Keep it clean, keep it fast.</p>
+        <p style="margin-top: 15px; opacity: 0.4; font-size: 12px;">by @wectazz & @iduchamp</p>
     </footer>
 
     <script>
         const translations = {
             en: {
-                hero_h1: 'Keep Evolving',
+                hero_h1: 'Best UI Experience',
                 subtitle: 'Next-Generation of HyperOS with focus on performance, clean UI, and deep core optimizations.',
                 join_tg: 'Join Telegram',
                 downloads: 'Downloads',
                 developing: 'In Developing',
-                btn_dl: 'Get Download'
+                btn_dl: 'Download ROM'
             },
             ru: {
-                hero_h1: 'Развивайся дальше',
+                hero_h1: 'Лучший опыт UI',
                 subtitle: 'HyperOS нового поколения: акцент на скорость, чистый дизайн и глубокую оптимизацию ядра.',
                 join_tg: 'Вступить в Telegram',
                 downloads: 'Загрузки',
                 developing: 'В разработке',
-                btn_dl: 'Скачать'
+                btn_dl: 'Скачать ROM'
             },
             pt: {
-                hero_h1: 'Continue Evoluindo',
+                hero_h1: 'Melhor Experiência UI',
                 subtitle: 'HyperOS de próxima geração com foco em desempenho, interface limpa e otimizações de núcleo.',
                 join_tg: 'Entrar no Telegram',
                 downloads: 'Downloads',
@@ -320,35 +318,34 @@
                 btn_dl: 'Baixar ROM'
             },
             es: {
-                hero_h1: 'Sigue Evolucionando',
+                hero_h1: 'Mejor Experiencia UI',
                 subtitle: 'HyperOS de próxima generación centrado en el rendimiento, interfaz limpia y optimizaciones.',
                 join_tg: 'Unirse a Telegram',
                 downloads: 'Descargas',
                 developing: 'En desarrollo',
-                btn_dl: 'Descargar'
+                btn_dl: 'Descargar ROM'
             },
             kz: {
-                hero_h1: 'Дамуды тоқтатпа',
+                hero_h1: 'Үздік UI тәжірибесі',
                 subtitle: 'Өнімділікке, таза дизайнға және ядроны терең оңтайландыруға бағытталған жаңа буын HyperOS.',
                 join_tg: 'Telegram-ға кіру',
                 downloads: 'Жүктеулер',
                 developing: 'Әзірленуде',
-                btn_dl: 'Жүктеп алу'
+                btn_dl: 'ROM жүктеу'
             },
             ua: {
-                hero_h1: 'Розвивайся далі',
+                hero_h1: 'Найкращий досвід UI',
                 subtitle: 'HyperOS нового покоління: фокус на продуктивність, чистий інтерфейс та оптимізацію ядра.',
                 join_tg: 'Приєднатися до Telegram',
                 downloads: 'Завантаження',
                 developing: 'В розробці',
-                btn_dl: 'Завантажити'
+                btn_dl: 'Завантажити ROM'
             }
         };
 
         function changeLang(lang) {
-            const langNames = { en: 'English', ru: 'Русский', pt: 'Português', es: 'Español', kz: 'Қазақша', ua: 'Українська' };
-            document.getElementById('active-lang').innerText = langNames[lang];
-            
+            const names = { en: 'English', ru: 'Русский', pt: 'Português', es: 'Español', kz: 'Қазақша', ua: 'Українська' };
+            document.getElementById('active-lang').innerText = names[lang];
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 el.innerText = translations[lang][key];
