@@ -41,23 +41,21 @@
             filter: blur(120px);
             opacity: 0.6;
             mix-blend-mode: screen;
-            animation: fluidMove 15s infinite alternate ease-in-out;
+            animation: fluidMove 12s infinite alternate ease-in-out;
         }
 
-        .red { background: radial-gradient(circle, #ff3b30 0%, transparent 70%); top: -10%; left: -10%; animation-duration: 8s; }
-        .green { background: radial-gradient(circle, #34c759 0%, transparent 70%); bottom: -10%; right: -10%; animation-duration: 10s; animation-delay: -2s; }
-        .yellow { background: radial-gradient(circle, #ffcc00 0%, transparent 70%); top: 40%; left: 50%; animation-duration: 7s; animation-delay: -4s; }
-        .blue { background: radial-gradient(circle, #007aff 0%, transparent 70%); bottom: 20%; left: -5%; animation-duration: 12s; }
-        .purple { background: radial-gradient(circle, #af52de 0%, transparent 70%); top: 10%; right: 10%; animation-duration: 9s; animation-delay: -5s; }
+        .red { background: radial-gradient(circle, #ff3b30 0%, transparent 70%); top: -10%; left: -10%; animation-duration: 7s; }
+        .green { background: radial-gradient(circle, #34c759 0%, transparent 70%); bottom: -10%; right: -10%; animation-duration: 9s; animation-delay: -2s; }
+        .yellow { background: radial-gradient(circle, #ffcc00 0%, transparent 70%); top: 40%; left: 50%; animation-duration: 6s; animation-delay: -3s; }
+        .blue { background: radial-gradient(circle, #007aff 0%, transparent 70%); bottom: 20%; left: -5%; animation-duration: 10s; }
+        .purple { background: radial-gradient(circle, #af52de 0%, transparent 70%); top: 10%; right: 10%; animation-duration: 8s; animation-delay: -4s; }
 
         @keyframes fluidMove {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            33% { transform: translate(15vw, 10vh) scale(1.2) rotate(120deg); }
-            66% { transform: translate(-10vw, 20vh) scale(0.8) rotate(240deg); }
-            100% { transform: translate(5vw, -5vh) scale(1.1) rotate(360deg); }
+            50% { transform: translate(10vw, 15vh) scale(1.1) rotate(180deg); }
+            100% { transform: translate(-5vw, 5vh) scale(1) rotate(360deg); }
         }
 
-        /* --- STARS LAYER --- */
         #stars-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -72,8 +70,8 @@
             top: 0; width: 100%; padding: 25px 50px;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
             border-bottom: 0.5px solid var(--glass-border);
         }
 
@@ -90,7 +88,7 @@
         header {
             padding: 180px 20px 80px;
             text-align: center;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
         }
 
@@ -100,43 +98,41 @@
         }
 
         h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
             font-weight: 800; letter-spacing: -3px; line-height: 1.1; margin-bottom: 25px;
-            background: linear-gradient(180deg, #fff 50%, rgba(255,255,255,0.6));
+            background: linear-gradient(180deg, #fff 50%, rgba(255,255,255,0.5));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .subtitle { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 40px; max-width: 600px; margin-inline: auto; }
+        .subtitle { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 40px; max-width: 650px; margin-inline: auto; }
 
         .btn-ios {
             background: #fff; color: #000; padding: 16px 35px; border-radius: 100px;
             text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s;
             display: inline-block;
         }
-        .btn-ios:hover { transform: scale(1.02); filter: brightness(0.9); }
+        .btn-ios:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
 
-        /* --- LIQUID GLASS GRID (4 COLUMNS) --- */
-        .container { max-width: 1500px; margin: 0 auto; padding: 0 40px 100px; }
+        /* --- GRID --- */
+        .container { max-width: 1600px; margin: 0 auto; padding: 0 40px 100px; }
         .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
         .card-ios {
-            position: relative;
             background: var(--glass);
-            backdrop-filter: blur(50px) saturate(200%);
-            -webkit-backdrop-filter: blur(50px) saturate(200%);
+            backdrop-filter: blur(60px) saturate(210%);
+            -webkit-backdrop-filter: blur(60px) saturate(210%);
             border: 0.5px solid var(--glass-border);
             border-radius: 35px;
             padding: 30px;
             display: flex; flex-direction: column;
-            transition: all 0.5s cubic-bezier(0.15, 0.83, 0.66, 1);
-            overflow: hidden;
+            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative; overflow: hidden;
         }
 
         .card-ios:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-10px);
             background: rgba(255,255,255,0.06);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.3);
         }
 
         /* Rainbow Border Flow on Hover */
@@ -151,33 +147,47 @@
         }
         .card-ios:hover::after { opacity: 1; }
 
-        .tag { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
-        .card h3 { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
-        .card-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 30px; display: block; }
+        .tag { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block; }
+        .card-ios h3 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+        .card-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 25px; display: block; font-family: monospace; }
 
         .log-box { flex-grow: 1; margin-bottom: 30px; }
-        .log-box span { display: block; font-size: 14px; margin-bottom: 12px; color: rgba(255,255,255,0.8); }
-        .log-box span::before { content: '●'; color: var(--accent); font-size: 8px; margin-right: 10px; vertical-align: middle; }
+        .log-box span { display: block; font-size: 13.5px; margin-bottom: 10px; color: rgba(255,255,255,0.85); line-height: 1.4; }
+        .log-box span::before { content: '•'; color: var(--accent); margin-right: 8px; font-weight: bold; }
 
-        .btn-card {
-            background: rgba(255,255,255,0.1); color: white; text-align: center;
-            padding: 12px; border-radius: 18px; text-decoration: none; font-size: 14px;
-            font-weight: 600; transition: 0.3s;
+        /* BUTTON GROUP */
+        .card-actions { display: flex; gap: 10px; }
+        .btn-ss { 
+            flex: 1; background: rgba(255,255,255,0.08); color: #fff; text-align: center;
+            padding: 14px; border-radius: 20px; text-decoration: none; font-size: 13px;
+            font-weight: 600; transition: 0.3s; border: 0.5px solid var(--glass-border);
         }
-        .btn-card:hover { background: white; color: black; }
+        .btn-ss:hover { background: rgba(255,255,255,0.15); }
 
-        .lang-selector { position: relative; cursor: pointer; font-size: 13px; font-weight: 600; }
+        .btn-dl { 
+            flex: 1.5; background: #fff; color: #000; text-align: center;
+            padding: 14px; border-radius: 20px; text-decoration: none; font-size: 13px;
+            font-weight: 700; transition: 0.3s;
+        }
+        .btn-dl:hover { filter: brightness(0.9); transform: scale(1.02); }
+
+        .lang-selector { position: relative; cursor: pointer; font-size: 14px; font-weight: 600; }
         .lang-menu {
-            position: absolute; top: 130%; right: 0; background: rgba(20,20,20,0.8);
-            backdrop-filter: blur(20px); border-radius: 15px; border: 0.5px solid var(--glass-border);
-            width: 140px; opacity: 0; visibility: hidden; transition: 0.3s; overflow: hidden;
+            position: absolute; top: 130%; right: 0; background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(30px); border-radius: 20px; border: 0.5px solid var(--glass-border);
+            width: 160px; opacity: 0; visibility: hidden; transition: 0.3s; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .lang-selector:hover .lang-menu { opacity: 1; visibility: visible; }
-        .lang-item { padding: 10px 15px; transition: 0.2s; }
-        .lang-item:hover { background: rgba(255,255,255,0.1); }
+        .lang-selector:hover .lang-menu { opacity: 1; visibility: visible; transform: translateY(5px); }
+        .lang-item { padding: 12px 20px; transition: 0.2s; color: rgba(255,255,255,0.7); }
+        .lang-item:hover { background: rgba(255,255,255,0.1); color: white; }
 
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } .brand { font-size: 18px; } }
+        @media (max-width: 1400px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            .grid { grid-template-columns: 1fr; } 
+            nav { padding: 20px; }
+            header { padding-top: 140px; }
+        }
     </style>
 </head>
 <body>
@@ -189,13 +199,12 @@
         <div class="blob blue"></div>
         <div class="blob purple"></div>
     </div>
-
     <canvas id="stars-canvas"></canvas>
 
     <nav>
         <div class="brand">TengeOS</div>
         <div class="nav-right">
-            <a href="#" class="pill">GitHub</a>
+            <a href="https://github.com/tngos" class="pill">GitHub</a>
             <div class="lang-selector">
                 <span id="active-lang">English</span>
                 <div class="lang-menu">
@@ -220,22 +229,19 @@
     <main class="container">
         <div class="grid">
             <div class="card-ios">
-                <span class="tag">System Mod</span>
+                <span class="tag">Official Build</span>
                 <h3>TengeOS Port</h3>
                 <span class="card-meta">v3.0.300.4 • duchamp</span>
                 <div class="log-box">
-                    <span data-i18n="dev">Deleted 10 seconds warning</span>
-                    <span data-i18n="dev">Added custom boot anim and logo</span>
-                    <span data-i18n="dev">Added monet picker</span>
-                    <span data-i18n="dev">Decrypted rom</span>
-                    <span data-i18n="dev">Added custom system apps (security, themes, apk installer, launcher, systemui, app vault)</span>
-                    <span data-i18n="dev">Added full russian language</span>
-                    <span data-i18n="dev">Disabled signature verification and apk protection</span>
-                    <span data-i18n="dev">Added Kaorios Toolbox</span>
-                    <span data-i18n="dev">SukiSU Ultra (40499) pre-rooted</span>
-                    <span data-i18n="dev">Added full 120hz (chose 1hz in settings) </span>
+                    <span data-i18n="log1">Deleted 10 seconds warning</span>
+                    <span data-i18n="log2">Added custom boot anim and logo</span>
+                    <span data-i18n="log4">Decrypted rom</span>
+                    <span data-i18n="log10">Added full 120hz (chose 1hz)</span>
                 </div>
-                <a href="https://drive.google.com/file/d/1pRKrcdmdKFNE9hOiZ7PafHSue2vBiiOB/view?usp=sharing" class="btn-card" data-i18n="btn_dl">Download ROM</a>
+                <div class="card-actions">
+                    <a href="#" class="btn-ss" data-i18n="btn_ss">Screens</a>
+                    <a href="https://drive.google.com/file/d/1pRKrcdmdKFNE9hOiZ7PafHSue2vBiiOB/view?usp=sharing" class="btn-dl" data-i18n="btn_dl">Download</a>
+                </div>
             </div>
 
             <div class="card-ios">
@@ -243,18 +249,18 @@
                 <h3>TengeOS Mod</h3>
                 <span class="card-meta">v3.0.5.0 • duchamp</span>
                 <div class="log-box">
-                    <span data-i18n="dev">Deleted 10 seconds warning</span>
-                    <span data-i18n="dev">Added custom boot anim and logo</span>
-                    <span data-i18n="dev">Added monet picker</span>
-                    <span data-i18n="dev">Decrypted rom</span>
-                    <span data-i18n="dev">Added custom system apps (security, themes, apk installer, launcher, systemui, app vault)</span>
-                    <span data-i18n="dev">Added full russian language</span>
-                    <span data-i18n="dev">Disabled signature verification and apk protection</span>
-                    <span data-i18n="dev">Added Kaorios Toolbox</span>
-                    <span data-i18n="dev">SukiSU Ultra (40499) pre-rooted</span>
+                    <span data-i18n="log3">Added monet picker</span>
+                    <span data-i18n="log5">Custom system apps added</span>
+                    <span data-i18n="log7">Disabled signature verification</span>
+                    <span data-i18n="log9">SukiSU Ultra pre-rooted</span>
                 </div>
-                <a href="https://gofile.io/d/8eaEC5" class="btn-card" data-i18n="btn_dl">Download ROM</a>
+                <div class="card-actions">
+                    <a href="#" class="btn-ss" data-i18n="btn_ss">Screens</a>
+                    <a href="https://gofile.io/d/8eaEC5" class="btn-dl" data-i18n="btn_dl">Download</a>
+                </div>
             </div>
+        </div>
+    </main>
 
     <script>
         // Stars Engine
@@ -279,18 +285,39 @@
 
         // Translation Engine
         const dict = {
-            en: { hero_h1: 'Best UI Experience', subtitle: 'Next-Generation of HyperOS with focus on performance, clean UI, and deep core optimizations.', join_tg: 'Join Telegram', dev: 'In Developing', btn_dl: 'Download ROM' },
-            ru: { hero_h1: 'Лучший UI опыт', subtitle: 'HyperOS нового поколения: фокус на скорости, чистом дизайне и глубокой оптимизации ядра.', join_tg: 'Вступить в Telegram', dev: 'В разработке', btn_dl: 'Скачать ROM' },
-            pt: { hero_h1: 'Melhor Experiência UI', subtitle: 'HyperOS de próxima geração com foco em desempenho, interface limpa e otimizações.', join_tg: 'Entrar no Telegram', dev: 'Em desenvolvimento', btn_dl: 'Baixar ROM' },
-            es: { hero_h1: 'Mejor Experiencia UI', subtitle: 'HyperOS de próxima generación centrado en el rendimiento y una interfaz limpia.', join_tg: 'Unirse a Telegram', dev: 'En desarrollo', btn_dl: 'Descargar ROM' },
-            kz: { hero_h1: 'Үздік UI тәжірибесі', subtitle: 'Өнімділікке, таза дизайнға және ядроны терең оңтайландыруға бағытталған жаңа буын HyperOS.', join_tg: 'Telegram-ға кіру', dev: 'Әзірленуде', btn_dl: 'ROM жүктеу' },
-            ua: { hero_h1: 'Найкращий досвід UI', subtitle: 'HyperOS нового покоління: фокус на продуктивність, чистий інтерфейс та оптимізацію ядра.', join_tg: 'Приєднатися до Telegram', dev: 'В розробці', btn_dl: 'Завантажити ROM' }
+            en: {
+                hero_h1: 'Best UI Experience', subtitle: 'Next-Generation of HyperOS with focus on performance, clean UI, and deep core optimizations.', join_tg: 'Join Telegram', dev: 'In Developing', dev_tag: 'In Developing', btn_dl: 'Download', btn_ss: 'Screens',
+                log1: 'Deleted 10 seconds warning', log2: 'Added custom boot anim and logo', log3: 'Added monet picker', log4: 'Decrypted rom', log5: 'Added custom system apps', log7: 'Disabled signature verification', log9: 'SukiSU Ultra pre-rooted', log10: 'Added full 120hz (chose 1hz)'
+            },
+            ru: {
+                hero_h1: 'Лучший UI опыт', subtitle: 'HyperOS нового поколения: фокус на скорости, чистом дизайне и глубокой оптимизации ядра.', join_tg: 'Вступить в Telegram', dev: 'В разработке', dev_tag: 'В разработке', btn_dl: 'Скачать', btn_ss: 'Скрины',
+                log1: 'Удалено 10 сек. ожидание', log2: 'Своя анимация загрузки и лого', log3: 'Добавлен Monet picker', log4: 'ROM расшифрован', log5: 'Кастомные системные приложения', log7: 'Отключена проверка подписи', log9: 'SukiSU Ultra (Root) встроен', log10: 'Полные 120Гц (выберите 1Гц)'
+            },
+            pt: {
+                hero_h1: 'Melhor Experiência UI', subtitle: 'HyperOS de próxima geração com foco em desempenho, interface limpa e otimizações de núcleo.', join_tg: 'Entrar no Telegram', dev: 'Em desenvolvimento', dev_tag: 'Em desenvolvimento', btn_dl: 'Baixar', btn_ss: 'Screens',
+                log1: 'Aviso de 10s removido', log2: 'Animação de boot personalizada', log3: 'Seletor Monet adicionado', log4: 'ROM descriptografada', log5: 'Apps de sistema customizados', log7: 'Verificação de assinatura desativada', log9: 'SukiSU Ultra pré-root', log10: '120Hz total (escolha 1Hz)'
+            },
+            es: {
+                hero_h1: 'Mejor Experiencia UI', subtitle: 'HyperOS de próxima generación centrado en el rendimiento, interfaz limpia y optimización.', join_tg: 'Unirse a Telegram', dev: 'En desarrollo', dev_tag: 'En desarrollo', btn_dl: 'Descargar', btn_ss: 'Capturas',
+                log1: 'Aviso de 10s eliminado', log2: 'Animación de inicio personalizada', log3: 'Selector Monet añadido', log4: 'ROM descifrada', log5: 'Apps de sistema personalizadas', log7: 'Firma deshabilitada', log9: 'SukiSU Ultra con root', log10: '120Hz completos (elegir 1Hz)'
+            },
+            kz: {
+                hero_h1: 'Үздік UI тәжірибесі', subtitle: 'Өнімділікке, таза дизайнға және ядроны терең оңтайландыруға бағытталған жаңа буын HyperOS.', join_tg: 'Telegram-ға кіру', dev: 'Әзірленуде', dev_tag: 'Әзірленуде', btn_dl: 'Жүктеу', btn_ss: 'Скриндер',
+                log1: '10 сек. күту жойылды', log2: 'Жүктеу анимациясы мен логотипі', log3: 'Monet picker қосылды', log4: 'ROM шифрдан шығарылды', log5: 'Жүйелік қолданбалар өзгертілді', log7: 'Қолтаңбаны тексеру өшірілді', log9: 'SukiSU Ultra (Root) енгізілген', log10: 'Толық 120Гц (1Гц таңдаңыз)'
+            },
+            ua: {
+                hero_h1: 'Найкращий досвід UI', subtitle: 'HyperOS нового покоління: фокус на продуктивність, чистий інтерфейс та оптимізацію ядра.', join_tg: 'Приєднатися до Telegram', dev: 'В розробці', dev_tag: 'В розробці', btn_dl: 'Завантажити', btn_ss: 'Скріни',
+                log1: 'Видалено 10 сек. очікування', log2: 'Кастомна анімація та лого', log3: 'Додано Monet picker', log4: 'ROM розшифровано', log5: 'Кастомні системні додатки', log7: 'Відключено перевірку підпису', log9: 'SukiSU Ultra (Root) вбудовано', log10: 'Повні 120Гц (оберіть 1Гц)'
+            }
         };
 
         function setL(l) {
-            const n = { en: 'English', ru: 'Русский', pt: 'Português', es: 'Español', kz: 'Қазақша', ua: 'Українська' };
-            document.getElementById('active-lang').innerText = n[l];
-            document.querySelectorAll('[data-i18n]').forEach(e => { e.innerText = dict[l][e.getAttribute('data-i18n')]; });
+            const names = { en: 'English', ru: 'Русский', pt: 'Português', es: 'Español', kz: 'Қазақша', ua: 'Українська' };
+            document.getElementById('active-lang').innerText = names[l];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[l][key]) el.innerText = dict[l][key];
+            });
         }
     </script>
 </body>
