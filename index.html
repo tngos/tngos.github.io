@@ -3,572 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyperposed | Custom HyperOS Project</title>
+    <title>TengeOS | HyperOS Project</title>
     <style>
-        /* --- CORE CONFIG --- */
         :root {
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --accent: #a855f7;
-            --bg-deep: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-main: #f3f4f6;
-            --text-dim: #9ca3af;
-            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --primary: #818cf8;
+            --primary-glow: rgba(129, 140, 248, 0.4);
+            --accent: #c084fc;
+            --bg-deep: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-deep);
             color: var(--text-main);
             overflow-x: hidden;
-            line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* --- BACKGROUND ENGINE --- */
         #bg-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             pointer-events: none;
         }
 
-        .ambient-glow {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* --- TOP NAVIGATION --- */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 0; width: 100%; padding: 25px 50px;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
         }
 
         .source-pill {
-            display: flex;
-            align-items: center;
-            gap: 8px;
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 100px;
             text-decoration: none;
-            color: var(--text-main);
+            color: white;
             font-weight: 600;
             font-size: 14px;
             transition: var(--transition);
+            display: flex; align-items: center; gap: 8px;
         }
 
         .source-pill:hover {
             border-color: var(--primary);
-            box-shadow: 0 0 20px var(--primary-glow);
+            box-shadow: 0 0 25px var(--primary-glow);
             transform: translateY(-2px);
         }
 
-        .lang-control {
-            position: relative;
-            padding-bottom: 15px; /* Bridge for hover */
-        }
-
+        .lang-control { position: relative; padding-bottom: 10px; }
         .lang-trigger {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 100px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .lang-trigger:hover {
-            border-color: var(--primary);
+            display: flex; align-items: center; gap: 10px;
+            font-size: 14px; font-weight: 600;
         }
 
         .lang-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: #0f172a;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            min-width: 160px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: var(--transition);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: absolute; top: 110%; right: 0;
+            background: #0f172a; border: 1px solid var(--border);
+            border-radius: 20px; min-width: 180px;
+            opacity: 0; visibility: hidden;
+            transform: translateY(15px); transition: var(--transition);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
-        .lang-control:hover .lang-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        .lang-control:hover .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-opt { padding: 14px 24px; cursor: pointer; transition: 0.3s; font-size: 14px; }
+        .lang-opt:hover { background: var(--primary); color: white; }
 
-        .lang-opt {
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-        }
-
-        .lang-opt:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* --- HEADER SECTION --- */
+        /* --- HERO --- */
         header {
-            padding: 180px 20px 100px;
+            padding: 200px 20px 80px;
             text-align: center;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .hero-logo {
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(4rem, 12vw, 8rem);
             font-weight: 900;
-            letter-spacing: -4px;
-            background: linear-gradient(to bottom, #fff 30%, #6366f1 100%);
+            letter-spacing: -5px;
+            background: linear-gradient(180deg, #fff 40%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 10px 20px rgba(99, 102, 241, 0.3));
+            filter: drop-shadow(0 0 30px rgba(129, 140, 248, 0.4));
+            margin-bottom: 20px;
         }
 
-        .hero-sub {
-            font-size: 1.25rem;
-            color: var(--text-dim);
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
+        .hero-sub { font-size: 1.4rem; color: var(--text-dim); margin-bottom: 40px; }
+        
         .tg-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--primary);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--primary); color: white;
+            padding: 16px 40px; border-radius: 16px;
+            text-decoration: none; font-weight: 800;
             transition: var(--transition);
-            box-shadow: 0 10px 30px var(--primary-glow);
-        }
-
-        .tg-btn:hover {
-            transform: scale(1.05);
             box-shadow: 0 15px 40px var(--primary-glow);
         }
+        .tg-btn:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 20px 50px var(--primary-glow); }
 
-        /* --- CONTENT GRID --- */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px 100px;
-        }
+        /* --- GRID AND CARDS --- */
+        .container { max-width: 1600px; margin: 0 auto; padding: 0 40px 100px; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr); /* 4 Columns */
+            gap: 25px;
+        }
+
+        .card-wrapper {
+            position: relative;
+            padding: 2px; /* For the gradient border */
+            border-radius: 30px;
+            background: var(--border);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        /* The Rainbow Flow Border */
+        .card-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary), var(--accent), transparent 60%);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 0;
+        }
+
+        .card-wrapper:hover::after { opacity: 1; }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 30px;
+            background: var(--bg-deep);
+            border-radius: 28px;
+            padding: 35px 30px;
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(12px);
+            z-index: 1;
+            height: 100%;
+            display: flex; flex-direction: column;
             transition: var(--transition);
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
-        }
+        .card-wrapper:hover .card { background: rgba(15, 23, 42, 0.95); }
 
-        .card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(99, 102, 241, 0.3);
-            background: rgba(17, 24, 39, 0.9);
-        }
-
-        .card:hover::before {
-            transform: translateX(100%);
-        }
-
-        .tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 12px;
-            display: block;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .card-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .card-ver {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-bottom: 24px;
-            display: block;
-        }
+        .tag { color: var(--primary); font-family: monospace; font-weight: 800; font-size: 12px; letter-spacing: 2px; margin-bottom: 15px; display: block; }
+        .card-title { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+        .card-ver { font-family: monospace; color: var(--text-dim); font-size: 14px; margin-bottom: 30px; display: block; }
 
         .logs-box {
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 30px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 35px;
             flex-grow: 1;
         }
 
-        .logs-box h4 {
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            color: var(--text-dim);
-            letter-spacing: 1px;
-        }
+        .logs-box h4 { font-size: 14px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 15px; }
+        .logs-box ul { list-style: none; }
+        .logs-box li { font-size: 14px; margin-bottom: 10px; color: #e2e8f0; display: flex; gap: 10px; }
+        .logs-box li::before { content: '◈'; color: var(--primary); }
 
-        .logs-box ul {
-            list-style: none;
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn {
+            padding: 14px; border-radius: 14px; text-decoration: none;
+            text-align: center; font-size: 13px; font-weight: 800;
+            transition: 0.3s; border: 1px solid var(--border);
         }
+        .btn-s { color: white; }
+        .btn-s:hover { background: rgba(255,255,255,0.05); }
+        .btn-d { background: white; color: black; border: none; }
+        .btn-d:hover { background: var(--primary); color: white; }
 
-        .logs-box li {
-            font-size: 14px;
-            margin-bottom: 8px;
-            padding-left: 18px;
-            position: relative;
-            color: #d1d5db;
-        }
+        footer { padding: 80px 20px; text-align: center; color: var(--text-dim); font-size: 14px; border-top: 1px solid var(--border); }
 
-        .logs-box li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        .actions {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 12px;
-        }
-
-        .action-btn {
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 700;
-            transition: 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .btn-ghost {
-            color: var(--text-main);
-        }
-
-        .btn-ghost:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
-        .btn-fill {
-            background: white;
-            color: black;
-            border: none;
-        }
-
-        .btn-fill:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        footer {
-            padding: 60px 20px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            font-size: 14px;
-            color: var(--text-dim);
-        }
-
-        /* --- MOBILE STYLES --- */
-        @media (max-width: 768px) {
-            nav { padding: 15px 20px; }
-            header { padding: 140px 20px 60px; }
+        /* RESPONSIVE */
+        @media (max-width: 1400px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 800px) { 
             .grid { grid-template-columns: 1fr; }
-            .hero-logo { font-size: 4rem; }
-            .source-pill span { display: none; }
+            nav { padding: 20px; }
+            .hero-logo { font-size: 3.5rem; }
         }
     </style>
 </head>
 <body>
 
     <canvas id="bg-canvas"></canvas>
-    <div class="ambient-glow"></div>
 
     <nav>
         <a href="https://github.com/tngos/tngos.github.io/tree/main" target="_blank" class="source-pill">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            <span>View Source</span>
+            <span>Source Code</span>
         </a>
 
         <div class="lang-control">
             <div class="lang-trigger">
-                <span id="active-lang">English</span>
+                <span id="cur-lang">English</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
             </div>
             <div class="lang-menu">
-                <div class="lang-opt" onclick="updateLang('en')">English</div>
-                <div class="lang-opt" onclick="updateLang('ru')">Русский</div>
-                <div class="lang-opt" onclick="updateLang('es')">Español</div>
-                <div class="lang-opt" onclick="updateLang('pt')">Português</div>
-                <div class="lang-opt" onclick="updateLang('kz')">Қазақша</div>
-                <div class="lang-opt" onclick="updateLang('ua')">Українська</div>
+                <div class="lang-opt" onclick="setLang('en')">English</div>
+                <div class="lang-opt" onclick="setLang('ru')">Русский</div>
+                <div class="lang-opt" onclick="setLang('pt')">Português</div>
+                <div class="lang-opt" onclick="setLang('es')">Español</div>
+                <div class="lang-opt" onclick="setLang('kz')">Қазақша</div>
+                <div class="lang-opt" onclick="setLang('ua')">Українська</div>
             </div>
         </div>
     </nav>
 
     <header>
-        <h1 class="hero-logo">Hyperposed</h1>
+        <h1 class="hero-logo">TengeOS</h1>
         <p class="hero-sub" data-i18n="subtitle">Next-Gen of HyperOS using</p>
-        <a href="https://t.me/TengeOS_Roms" target="_blank" class="tg-btn">
-            <span>Join Telegram</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <a href="https://t.me/TengeOS_Roms" class="tg-btn">
+            <span data-i18n="join_tg">Join Telegram</span>
         </a>
     </header>
 
     <main class="container">
         <div class="grid">
-            <div class="card">
-                <span class="tag">Flagship Port</span>
-                <h3 class="card-title">Hyperposed Port</h3>
-                <span class="card-ver">v3.0.300.4CO5 • #duchamp</span>
-                <div class="logs-box">
-                    <h4 data-i18n="log_title">Technical Changes</h4>
-                    <ul>
-                        <li data-i18n="c1_1">SukiSU Ultra + SusFS Integration</li>
-                        <li data-i18n="c1_2">Custom Modded System Apps</li>
-                        <li data-i18n="c1_3">Kernel Level Optimizations</li>
-                        <li data-i18n="c1_4">Redmi K80 Ultra Base Build</li>
-                    </ul>
-                </div>
-                <div class="actions">
-                    <a href="#" class="action-btn btn-ghost" data-i18n="btn_ss">Screenshots</a>
-                    <a href="#" class="action-btn btn-fill" data-i18n="btn_dl">Get ROM</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <span class="tag">Stable Mod</span>
-                <h3 class="card-title">Hyperposed Mod</h3>
-                <span class="card-ver">v3.0.5.0 • #duchamp</span>
-                <div class="logs-box">
-                    <h4 data-i18n="log_title">Technical Changes</h4>
-                    <ul>
-                        <li data-i18n="c2_1">Bloatware Removed Build</li>
-                        <li data-i18n="c2_2">Official HyperOS Enhanced</li>
-                        <li data-i18n="c2_3">Improved Background Control</li>
-                        <li data-i18n="c2_4">Advanced Camera Profile</li>
-                    </ul>
-                </div>
-                <div class="actions">
-                    <a href="#" class="action-btn btn-ghost" data-i18n="btn_ss">Screenshots</a>
-                    <a href="#" class="action-btn btn-fill" data-i18n="btn_dl">Get ROM</a>
+            <div class="card-wrapper">
+                <div class="card">
+                    <span class="tag">PORT</span>
+                    <h3 class="card-title">TengeOS Port</h3>
+                    <span class="card-ver">v3.0.300 • #duchamp</span>
+                    <div class="logs-box">
+                        <h4 data-i18n="tech_title">Status</h4>
+                        <ul>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                        </ul>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn btn-s" data-i18n="btn_ss">Screens</a>
+                        <a href="#" class="btn btn-d" data-i18n="btn_dl">Download</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
-                <span class="tag">Gaming Edition</span>
-                <h3 class="card-title">Hyperposed Game</h3>
-                <span class="card-ver">v1.0.2.0 • #duchamp</span>
-                <div class="logs-box">
-                    <h4 data-i18n="log_title">Technical Changes</h4>
-                    <ul>
-                        <li data-i18n="c3_1">Ultra Thermal Driver</li>
-                        <li data-i18n="c3_2">GPU Frequency Unlocked</li>
-                        <li data-i18n="c3_3">Low Latency Touch Response</li>
-                        <li data-i18n="c3_4">FPS Stability Patches</li>
-                    </ul>
-                </div>
-                <div class="actions">
-                    <a href="#" class="action-btn btn-ghost" data-i18n="btn_ss">Screenshots</a>
-                    <a href="#" class="action-btn btn-fill" data-i18n="btn_dl">Get ROM</a>
+            <div class="card-wrapper">
+                <div class="card">
+                    <span class="tag">MOD</span>
+                    <h3 class="card-title">TengeOS Mod</h3>
+                    <span class="card-ver">v3.0.5.0 • #duchamp</span>
+                    <div class="logs-box">
+                        <h4 data-i18n="tech_title">Status</h4>
+                        <ul>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                        </ul>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn btn-s" data-i18n="btn_ss">Screens</a>
+                        <a href="#" class="btn btn-d" data-i18n="btn_dl">Download</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
-                <span class="tag">Global Pure</span>
-                <h3 class="card-title">Hyperposed Pure</h3>
-                <span class="card-ver">v1.0.15.0 • #duchamp</span>
-                <div class="logs-box">
-                    <h4 data-i18n="log_title">Technical Changes</h4>
-                    <ul>
-                        <li data-i18n="c4_1">Global EEA Base Foundation</li>
-                        <li data-i18n="c4_2">Maximum Battery Efficiency</li>
-                        <li data-i18n="c4_3">Banking Apps Compatibility</li>
-                        <li data-i18n="c4_4">Native Multi-language Support</li>
-                    </ul>
+            <div class="card-wrapper">
+                <div class="card">
+                    <span class="tag">GAME</span>
+                    <h3 class="card-title">TengeOS Gaming</h3>
+                    <span class="card-ver">v1.0.2.0 • #duchamp</span>
+                    <div class="logs-box">
+                        <h4 data-i18n="tech_title">Status</h4>
+                        <ul>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                        </ul>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn btn-s" data-i18n="btn_ss">Screens</a>
+                        <a href="#" class="btn btn-d" data-i18n="btn_dl">Download</a>
+                    </div>
                 </div>
-                <div class="actions">
-                    <a href="#" class="action-btn btn-ghost" data-i18n="btn_ss">Screenshots</a>
-                    <a href="#" class="action-btn btn-fill" data-i18n="btn_dl">Get ROM</a>
+            </div>
+
+            <div class="card-wrapper">
+                <div class="card">
+                    <span class="tag">PURE</span>
+                    <h3 class="card-title">TengeOS Pure</h3>
+                    <span class="card-ver">v1.0.15.0 • #duchamp</span>
+                    <div class="logs-box">
+                        <h4 data-i18n="tech_title">Status</h4>
+                        <ul>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                            <li data-i18n="developing">In Developing</li>
+                        </ul>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn btn-s" data-i18n="btn_ss">Screens</a>
+                        <a href="#" class="btn btn-d" data-i18n="btn_dl">Download</a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Hyperposed Project. Developed by @wectazz & @iduchamp.</p>
+        <p>&copy; 2026 TengeOS Project. Developed by @wectazz & @iduchamp.</p>
     </footer>
 
     <script>
-        // --- CANVAS PARTICLES ENGINE ---
+        // Particles
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        const mouse = { x: null, y: null, radius: 150 };
-
-        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
-
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for(let i=0; i<80; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 1,
-                    speedX: (Math.random() - 0.5) * 0.5,
-                    speedY: (Math.random() - 0.5) * 0.5
-                });
-            }
+        let dots = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            dots = [];
+            for(let i=0; i<100; i++) dots.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2, vx: Math.random()-0.5, vy: Math.random()-0.5});
         }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.2)';
-            
-            particles.forEach(p => {
-                p.x += p.speedX;
-                p.y += p.speedY;
-
-                if(p.x > canvas.width) p.x = 0;
-                if(p.x < 0) p.x = canvas.width;
-                if(p.y > canvas.height) p.y = 0;
-                if(p.y < 0) p.y = canvas.height;
-
-                // Mouse interaction
-                let dx = mouse.x - p.x;
-                let dy = mouse.y - p.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                if(distance < mouse.radius) {
-                    p.x -= dx/20;
-                    p.y -= dy/20;
-                }
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(129, 140, 248, 0.2)";
+            dots.forEach(d => {
+                d.x += d.vx; d.y += d.vy;
+                if(d.x<0 || d.x>canvas.width) d.vx*=-1;
+                if(d.y<0 || d.y>canvas.height) d.vy*=-1;
+                ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI*2); ctx.fill();
             });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(draw);
         }
+        init(); draw(); window.onresize = init;
 
-        initCanvas();
-        animate();
-        window.onresize = initCanvas;
-
-        // --- TRANSLATION ENGINE ---
-        const i18n = {
-            en: {
-                subtitle: 'Next-Gen of HyperOS using',
-                log_title: 'Technical Changes',
-                btn_ss: 'Screenshots', btn_dl: 'Get ROM',
-                c1_1: 'SukiSU Ultra + SusFS Integration', c1_2: 'Custom Modded System Apps', c1_3: 'Kernel Level Optimizations', c1_4: 'Redmi K80 Ultra Base Build',
-                c2_1: 'Bloatware Removed Build', c2_4: 'Advanced Camera Profile',
-                c3_1: 'Ultra Thermal Driver', c3_4: 'FPS Stability Patches',
-                c4_1: 'Global EEA Base Foundation', c4_2: 'Maximum Battery Efficiency'
-            },
-            ru: {
-                subtitle: 'Новое поколение использования HyperOS',
-                log_title: 'Технические изменения',
-                btn_ss: 'Скриншоты', btn_dl: 'Скачать ROM',
-                c1_1: 'Интеграция SukiSU Ultra + SusFS', c1_2: 'Модифицированные системные приложения', c1_3: 'Оптимизация на уровне ядра', c1_4: 'База Redmi K80 Ultra',
-                c2_1: 'Полная очистка от мусора', c2_4: 'Продвинутый профиль камеры',
-                c3_1: 'Улучшенный термоконтроль', c3_4: 'Патчи стабильности FPS',
-                c4_1: 'Основа на базе Global EEA', c4_2: 'Максимальная энергоэффективность'
-            },
-            pt: {
-                subtitle: 'Nova geração de uso do HyperOS',
-                log_title: 'Mudanças Técnicas',
-                btn_ss: 'Screenshots', btn_dl: 'Baixar ROM',
-                c1_1: 'Integração SukiSU Ultra + SusFS', c1_2: 'Apps de sistema modificados', c1_3: 'Otimizações de Kernel', c1_4: 'Base Redmi K80 Ultra',
-                c2_1: 'Build sem Bloatware', c2_4: 'Perfil de Câmera Avançado',
-                c3_1: 'Driver Térmico Ultra', c3_4: 'Patches de Estabilidade FPS',
-                c4_1: 'Fundação Base Global EEA', c4_2: 'Máxima Eficiência de Bateria'
-            }
-            // ... (другие языки можно добавить по аналогии)
+        // Translation Engine
+        const translations = {
+            en: { subtitle: 'Next-Gen of HyperOS using', join_tg: 'Join Telegram', tech_title: 'Status', developing: 'In Developing', btn_ss: 'Screens', btn_dl: 'Download' },
+            ru: { subtitle: 'Новое поколение HyperOS', join_tg: 'Вступить в Telegram', tech_title: 'Статус', developing: 'В разработке', btn_ss: 'Скрины', btn_dl: 'Скачать' },
+            pt: { subtitle: 'Nova geração do HyperOS', join_tg: 'Entrar no Telegram', tech_title: 'Status', developing: 'Em desenvolvimento', btn_ss: 'Screens', btn_dl: 'Baixar' },
+            es: { subtitle: 'Nueva generación de HyperOS', join_tg: 'Unirse a Telegram', tech_title: 'Estado', developing: 'En desarrollo', btn_ss: 'Capturas', btn_dl: 'Descargar' },
+            kz: { subtitle: 'HyperOS-тың жаңа буыны', join_tg: 'Telegram-ға кіру', tech_title: 'Мәртебесі', developing: 'Әзірленуде', btn_ss: 'Скриншоттар', btn_dl: 'Жүктеу' },
+            ua: { subtitle: 'Нове покоління HyperOS', join_tg: 'Приєднатися до Telegram', tech_title: 'Статус', developing: 'В розробці', btn_ss: 'Скріни', btn_dl: 'Завантажити' }
         };
 
-        function updateLang(lang) {
-            const names = { en: 'English', ru: 'Русский', es: 'Español', pt: 'Português', kz: 'Қазақша', ua: 'Українська' };
-            document.getElementById('active-lang').innerText = names[lang];
-            
+        function setLang(lang) {
+            const names = { en: 'English', ru: 'Русский', pt: 'Português', es: 'Español', kz: 'Қазақша', ua: 'Українська' };
+            document.getElementById('cur-lang').innerText = names[lang];
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if(i18n[lang] && i18n[lang][key]) {
-                    el.innerText = i18n[lang][key];
-                } else if (i18n.en[key]) {
-                    el.innerText = i18n.en[key]; // Fallback to EN
-                }
+                el.innerText = translations[lang][key];
             });
         }
     </script>
